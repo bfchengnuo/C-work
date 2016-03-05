@@ -1,0 +1,35 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Student
+{
+	int ID;
+	float score;
+	struct Student*next;
+};
+int main()
+{
+	struct Student *pNew,*Head,*p;
+	float max=0.0;
+	int i;
+	Head=(struct Student*)malloc(sizeof(struct Student));
+	printf("请输入第一个学生信息:\n");
+	scanf("%d%f",&Head->ID,&Head->score);
+	Head->next=NULL;
+	for(i=2;i<=3;i++)
+	{
+		pNew=(struct Student*)malloc(sizeof(struct Student));
+		printf("请输入第%d个学生信息:\n",i);
+		scanf("%d%f",&pNew->ID,&pNew->score);
+		pNew->next=Head->next;
+		Head->next=pNew;
+	}
+	p=Head;
+	while(p)
+	{
+		if(p->score>max)
+			max=p->score;
+		p=p->next;
+	}
+	printf("成绩最高者为%f\n",max);
+	return 0;
+}

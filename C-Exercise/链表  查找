@@ -1,0 +1,33 @@
+#include<stdio.h>
+#include<stdlib.h>
+struct Student
+{
+	char name[20];
+	int ID;
+	struct Student*next;
+} ;
+int main()
+{
+	struct Student *Head,*p,*pNew;
+	int i;
+	Head=(struct Student*)malloc(sizeof(struct Student));
+	printf("请输入第一个学生信息:\n");
+	scanf("%s%d",&Head->name,&Head->ID);
+	Head->next=NULL;
+	for(i=2;i<=3;i++)
+	{
+		pNew=(struct Student*)malloc(sizeof(struct Student));
+		printf("请输入第%d个学生信息:\n",i);
+		scanf("%s%d",&pNew->name,&pNew->ID);
+		pNew->next=Head->next;
+		Head->next=pNew;
+	}
+	p=Head;
+	int x;
+	printf("请输入要查找的学号\n");
+	scanf("%d",&x);
+	while(p&&p->ID!=x)
+		p=p->next; 
+	printf("该生信息为%s\t%d\n",p->name,p->ID);
+	return 0;
+}

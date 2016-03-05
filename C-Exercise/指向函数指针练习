@@ -1,0 +1,21 @@
+pro1：输入一个字符串，将字符串中大写字母转换成小写。
+ps1：用指向函数的指针实现。
+pro2：输入3个学生的姓名，输出要找的学生的姓名。
+ps2：用返回指针的函数实现（数据结构请用二维数组）
+-----------解题1------------
+#include<stdio.h>
+#include<string.h>
+void convert(char str[])
+{
+	strlwr(str);
+	printf("%s\n",str);
+}
+int main()
+{
+	char a[]={"CHIna"};
+	void (*pf)(char str[]);
+	pf=convert;
+	pf(a);
+	return 0;
+}
+--------------解题2---------------

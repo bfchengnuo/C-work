@@ -1,0 +1,27 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	int i,j,k,t,*p,n;
+	printf("输入几个整数\n");
+	scanf("%d",&n);
+	p=(int*)calloc(n,sizeof(int));
+	for(i=0;i<4;i++)
+		scanf("%f",p+i);
+	for(i=0;i<4;i++)
+	{
+		k=i;
+		for(j=i+1;j<3;j++)
+			if(p[k]>p[j])
+				k=j;
+			if(k!=j)
+			{
+				t=p[i];
+				p[i]=p[k];
+				p[k]=t;
+			}
+	}
+	for(i=0;i<4;i++)
+		printf("%d\t",*(p+i));
+	return 0;
+}

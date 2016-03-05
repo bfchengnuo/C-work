@@ -1,0 +1,16 @@
+#include<stdio.h>
+void search(char (*p)[100],int n)
+{
+	printf("%s\n",(p[n-1]));
+}
+int main()
+{
+	char a[3][100]={{"zhao"},{"li"},{"wang"}};
+	int x;
+	void (*pf)(char (*p)[100],int n);
+	printf("输入要找第几个名字\n");
+	scanf("%d",&x);
+	pf=search;
+	(*pf)(a,x);
+	return 0;
+}

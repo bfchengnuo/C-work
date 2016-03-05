@@ -1,0 +1,39 @@
+# include <stdio.h>
+# include <math.h>
+
+main(void)
+
+{
+	int a,b,c;
+	float x1,x2,d;
+
+  printf("请输入a：\n");
+  scanf("%d",&a);
+  printf("请输入b：\n");
+  scanf("%d",&b);
+  printf("请输入c：\n");
+  scanf("%d",&c);
+  printf ("方程：y=%dx*x+%dx+%d\n",a,b,c);
+
+  d = b * b - 4 * a * c;
+
+  if (d<0)
+  {
+    printf("方程没有实数根\n");
+  }
+
+  if(d==0)
+  {
+    printf("方程有一个实数根:\n");
+	x1 = -b/(2*a);
+	printf("x1=%4.2lf\n",x1);
+  }
+
+  if(d>0)
+  {
+    printf("方程有两个实数根:\n");
+    x1 = (-b+sqrt(d))/(2*a);
+	x2 = (-b-sqrt(d))/(2*a);
+	printf("x1=%4.2lf,x2=%4.2lf\n",x1,x2);
+  }
+}

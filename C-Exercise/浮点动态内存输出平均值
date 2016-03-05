@@ -1,0 +1,18 @@
+#include<stdio.h>
+#include<stdlib.h>
+int main()
+{
+	float *p1,*p2,sum=0.0;
+	int i,n;
+	printf("输入整数个数\n");
+	scanf("%d",&n);
+	p1=(float*)calloc(n,sizeof(float));
+	for(i=0;i<4;i++)
+		scanf("%f",p1+i);
+	for(i=0;i<4;i++)
+		sum+=p1[i];
+	p2=(float*)malloc(sizeof(float));
+	*p2=(sum/4);
+	printf("平均值为%f\n",*p2);
+	return 0;
+} 

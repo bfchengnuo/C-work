@@ -1,0 +1,72 @@
+#ifndef _SORT_H
+#define _SORT_H
+
+#include <stdio.h>
+#include <stdlib.h>
+typedef int DataType;
+
+// InsertSort
+void InsertionSort(DataType arr[], int length){
+	int i, j;
+
+	for(i = 1; i < length; i++)
+		if(arr[i] < arr[i - 1]){				// 当arr[i]小于arr[i-1]时，数组出现非顺序排列，故进行插入排序
+			int temp = arr[i];
+			for(j = i - 1; temp < arr[j]; j--)	// 寻找适合的插入点并移动数据
+				arr[j + 1] = arr[j];
+			arr[j + 1] = temp;					// 插入数据
+		}
+}
+
+// ShellSort
+int* MakeDLta(int length, int* num){			// 该函数用于生成增量表，由于增量表在增量为质数时效率取值较高，故生成质数表
+	int* temp = (int*)malloc(sizeof(int)*100);	// 为增量表申请的100个内存只是保险起见，实际个数是*num
+	int i = 0;
+	*num = 0;									// sum表示增量表的元素个数
+	length /= 2;
+	
+	for(i = length; i > 0; i--){
+		if(IsPrime(i) == 1){
+			temp[*num] = i;
+			(*num)++;
+		}
+	}
+	temp[(*num)++] = 1;							// 增量表最后一个值必须为1
+	return temp;
+}
+int IsPrime(int num){
+	if(num <= 1)
+		return 0;
+	else if(num == 2)
+		return 1;
+	else{
+		int i = 0;
+		for(i = 2; i < num; i++)
+			if(num % i == 0)
+				return 0;
+	}
+	return 1;
+}
+
+void ShellInsert(DataType arr[], int length, int dk){		// 对数组作一趟希尔排序，dk为本次希尔排序的增量值
+	int i, j;
+	for(i = dk; i < length; i++){
+		if(arr[i] < arr[i - dk]){							// 需将arr[i]插入有序增量子表
+			int temp = arr[i];
+			for(j = i - dk; j >= 0 && (temp < arr[j]); j -= dk)
+				arr[j + dk] = arr[j];						// 记录后移，查找插入位置
+			arr[j + dk] = temp;
+		}
+	}
+}
+void ShellSort(DataType arr[], int length){					// 按自动生成的质数增量表dlta[0..]对顺序表L进行希尔排序
+	int k;
+	int t = 0;
+	int *dlta = MakeDLta(length, &t);						// 函数MakeDlta的返回值为增量表数组首地址，增量表元素个数为t
+
+	for(k = 0; k < t; k++){
+		ShellInsert(arr, length, dlta[k]);					// 一趟增量为dlta[k]的插入排序
+	}
+}
+
+#endif

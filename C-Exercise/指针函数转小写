@@ -1,0 +1,15 @@
+#include<stdio.h>
+#include<string.h>
+void convert(char str[])
+{
+	strlwr(str);
+	printf("%s\n",str);
+}
+int main()
+{
+	char a[]={"CHIna"};
+	void (*pf)(char str[]);
+	pf=convert;
+	pf(a);
+	return 0;
+}
